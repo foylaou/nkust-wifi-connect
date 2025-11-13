@@ -66,6 +66,37 @@
         "NSLocationWhenInUseUsageDescription": "本應用程式需要存取您的位置，以便偵測並顯示您目前的 Wi-Fi 網路名稱 (SSID)。"
       }
     },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "zip"
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Utility"
+    },
     "files": [
       "dist/**/*",
       "dist-electron/**/*",
