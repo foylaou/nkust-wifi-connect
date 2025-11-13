@@ -65,6 +65,10 @@
         "zip"
       ],
       "category": "public.app-category.utilities",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
         "NSLocationWhenInUseUsageDescription": "本應用程式需要存取您的位置，以便偵測並顯示您目前的 Wi-Fi 網路名稱 (SSID)。"
       }

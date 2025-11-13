@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 /release/
 /dist-electron/
+
+# macOS Code Signing
+*.p12
+*.cer
+*.provisionprofile
