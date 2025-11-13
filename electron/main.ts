@@ -25,7 +25,14 @@ const updateTrayMenu = () => {
     const contextMenu = Menu.buildFromTemplate([
         { label: `Wi-Fi 狀態：${currentWifiStatus}` },
         { label: `登入狀態：${currentLoginStatus}` },
-        { label: `自動登入：${autoLoginStatus}` },
+        {
+            label: `自動登入：${autoLoginStatus}`,
+            click: () => {
+                currentAutoLogin = !currentAutoLogin;
+                setAutoLogin(currentAutoLogin);
+                updateTrayMenu();
+            }
+        },
         { type: "separator" },
         {
             label: "開啟主視窗",
