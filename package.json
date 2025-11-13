@@ -53,6 +53,7 @@
   "build": {
     "appId": "com.nkust.wifi-connect",
     "productName": "nkust-wifi-connect",
+    "publish": null,
     "mac": {
       "target": [
         {
