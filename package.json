@@ -1,0 +1,83 @@
+{
+  "name": "nkust-wifi-connect",
+  "version": "1.0.0",
+  "description": "NKUST WiFi Auto Login Tool",
+  "main": "dist-electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "electron",
+    "vite",
+    "react",
+    "nkust",
+    "wifi"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "electron-store": "^10.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sudo-prompt": "^9.2.1",
+    "systeminformation": "^5.27.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^24.10.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.13.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.7",
+    "vite-plugin-electron": "^0.29.0"
+  },
+  "build": {
+    "appId": "com.nkust.wifi-connect",
+    "productName": "nkust-wifi-connect",
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        "zip"
+      ],
+      "category": "public.app-category.utilities",
+      "extendInfo": {
+        "NSLocationWhenInUseUsageDescription": "本應用程式需要存取您的位置，以便偵測並顯示您目前的 Wi-Fi 網路名稱 (SSID)。"
+      }
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "assets/**/*",
+      "node_modules/electron-store/**/*"
+    ],
+    "asarUnpack": [
+      "dist/**/*",
+      "assets/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    }
+  },
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
+}
