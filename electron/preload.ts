@@ -9,5 +9,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
         ipcRenderer.invoke("save-credentials", studentId, password),
     getCredentials: async (): Promise<{ studentId: string; password: string }> =>
         ipcRenderer.invoke("get-credentials"),
-    hasCredentials:async (): Promise<boolean> => ipcRenderer.invoke("has-credentials"),
+    hasCredentials: async (): Promise<boolean> => ipcRenderer.invoke("has-credentials"),
+    getAutoLogin: async (): Promise<boolean> => ipcRenderer.invoke("get-auto-login"),
+    setAutoLogin: async (enabled: boolean): Promise<void> =>
+        ipcRenderer.invoke("set-auto-login", enabled),
 });

@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { getCurrentSSID } from "./wifi";
 import { loginNKUST } from "./nkustAuth";
-import { getCredentials, setCredentials, hasCredentials } from "./store";
+import { getCredentials, setCredentials, hasCredentials, getAutoLogin, setAutoLogin } from "./store";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,13 +16,38 @@ let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 let currentWifiStatus = "檢測中...";
 let currentLoginStatus = "-";
+let currentAutoLogin = true;
+
+// 建立更新 tray menu 的函數
+const updateTrayMenu = () => {
+    if (!tray || tray.isDestroyed()) return;
+    const autoLoginStatus = currentAutoLogin ? "✓ 已啟用" : "✗ 已停用";
+    const contextMenu = Menu.buildFromTemplate([
+        { label: `Wi-Fi 狀態：${currentWifiStatus}` },
+        { label: `登入狀態：${currentLoginStatus}` },
+        { label: `自動登入：${autoLoginStatus}` },
+        { type: "separator" },
+        {
+            label: "開啟主視窗",
+            click: () => {
+                if (!mainWindow || mainWindow.isDestroyed()) {
+                    createMainWindow();
+                } else {
+                    mainWindow.show();
+                }
+            }
+        },
+        { label: "退出", click: () => app.quit() },
+    ]);
+    tray.setContextMenu(contextMenu);
+};
 
 const createMainWindow = () => {
     const preloadPath = path.join(__dirname, "preload.cjs");
 
     mainWindow = new BrowserWindow({
         width: 480,
-        height: 600,
+        height: 800,
         show: false,
         webPreferences: {
             preload: preloadPath,
@@ -59,28 +84,8 @@ app.whenReady().then(() => {
     tray = new Tray(icon);
     tray.setToolTip("NKUST Wi-Fi 登入小幫手");
 
-    // 建立更新 tray menu 的函數
-    const updateTrayMenu = () => {
-        if (!tray || tray.isDestroyed()) return;
-        const contextMenu = Menu.buildFromTemplate([
-            { label: `Wi-Fi 狀態：${currentWifiStatus}` },
-            { label: `登入狀態：${currentLoginStatus}` },
-            { type: "separator" },
-            {
-                label: "開啟主視窗",
-                click: () => {
-                    if (!mainWindow || mainWindow.isDestroyed()) {
-                        createMainWindow();
-                    } else {
-                        mainWindow.show();
-                    }
-                }
-            },
-            { label: "退出", click: () => app.quit() },
-        ]);
-        tray.setContextMenu(contextMenu);
-    };
-
+    // 載入自動登入設定
+    currentAutoLogin = getAutoLogin();
     updateTrayMenu();
     createMainWindow();
 
@@ -99,13 +104,15 @@ app.whenReady().then(() => {
             // 更新狀態變數
             currentWifiStatus = ssid || "(未連線)";
 
-            if (ssid === "NKUST" && hasCredentials()) {
+            if (ssid === "NKUST" && hasCredentials() && currentAutoLogin) {
                 const { studentId, password } = getCredentials();
                 currentLoginStatus = "偵測到 NKUST，正在登入...";
                 updateTrayMenu();
 
                 const result = await loginNKUST(studentId, password);
                 currentLoginStatus = result;
+            } else if (ssid === "NKUST" && hasCredentials() && !currentAutoLogin) {
+                currentLoginStatus = "自動登入已停用";
             } else if (ssid === "NKUST") {
                 currentLoginStatus = "未設定帳號密碼";
             } else {
@@ -150,6 +157,18 @@ ipcMain.handle("save-credentials", async (_event, studentId: string, password: s
 // IPC 給 React 取得憑證狀態
 ipcMain.handle("get-credentials", async () => {
     return getCredentials();
+});
+
+// IPC 給 React 取得自動登入狀態
+ipcMain.handle("get-auto-login", async () => {
+    return getAutoLogin();
+});
+
+// IPC 給 React 設定自動登入狀態
+ipcMain.handle("set-auto-login", async (_event, enabled: boolean) => {
+    setAutoLogin(enabled);
+    currentAutoLogin = enabled;
+    updateTrayMenu();
 });
 
 app.on("window-all-closed", () => {

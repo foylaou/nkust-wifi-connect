@@ -4,6 +4,7 @@ import Store from "electron-store";
 interface StoreSchema {
     studentId: string;
     password: string;
+    autoLogin: boolean;
 }
 
 const store = new Store<StoreSchema>({
@@ -11,6 +12,7 @@ const store = new Store<StoreSchema>({
     defaults: {
         studentId: "",
         password: "",
+        autoLogin: true,
     },
 });
 
@@ -34,4 +36,12 @@ export function hasCredentials(): boolean {
 export function clearCredentials(): void {
     store.set("studentId", "");
     store.set("password", "");
+}
+
+export function getAutoLogin(): boolean {
+    return store.get("autoLogin", true);
+}
+
+export function setAutoLogin(enabled: boolean): void {
+    store.set("autoLogin", enabled);
 }

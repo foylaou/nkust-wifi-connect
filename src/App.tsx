@@ -9,6 +9,8 @@ declare global {
             manualLogin: () => Promise<string>;
             saveCredentials: (studentId: string, password: string) => Promise<string>;
             getCredentials: () => Promise<{ studentId: string; password: string }>;
+            getAutoLogin: () => Promise<boolean>;
+            setAutoLogin: (enabled: boolean) => Promise<void>;
         };
     }
 }
@@ -20,6 +22,7 @@ export default function App() {
     const [password, setPassword] = useState("");
     const [saveMessage, setSaveMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [autoLogin, setAutoLogin] = useState(true);
 
     useEffect(() => {
         // 監聽 WiFi 狀態更新
@@ -32,6 +35,11 @@ export default function App() {
         window.electronAPI.getCredentials().then((creds) => {
             setStudentId(creds.studentId);
             setPassword(creds.password);
+        });
+
+        // 載入自動登入設定
+        window.electronAPI.getAutoLogin().then((enabled) => {
+            setAutoLogin(enabled);
         });
     }, []);
 
@@ -46,6 +54,12 @@ export default function App() {
         const result = await window.electronAPI.saveCredentials(studentId, password);
         setSaveMessage(result);
         setTimeout(() => setSaveMessage(""), 3000);
+    };
+
+    const handleAutoLoginToggle = async () => {
+        const newValue = !autoLogin;
+        setAutoLogin(newValue);
+        await window.electronAPI.setAutoLogin(newValue);
     };
 
     return (
@@ -63,6 +77,9 @@ export default function App() {
                     <p className="text-sm text-gray-600 mt-1">
                         登入狀態：<span className="font-semibold">{status}</span>
                     </p>
+                    {saveMessage && (
+                        <p className="text-sm text-green-600 text-center">{saveMessage}</p>
+                    )}
                 </div>
 
                 {/* 憑證設定表單 */}
@@ -105,15 +122,35 @@ export default function App() {
                                 </button>
                             </div>
                         </div>
+
+                        {/* 自動登入設定 */}
+                        <div className="pt-3 pb-3 border-t border-gray-200">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-sm font-medium text-gray-700">自動登入</h3>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        偵測到 NKUST 時自動登入
+                                    </p>
+                                </div>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={autoLogin}
+                                        onChange={handleAutoLoginToggle}
+                                        className="sr-only peer"
+                                    />
+                                    <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                        </div>
+
                         <button
                             onClick={handleSaveCredentials}
                             className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium"
                         >
                             儲存設定
                         </button>
-                        {saveMessage && (
-                            <p className="text-sm text-green-600 text-center">{saveMessage}</p>
-                        )}
+
                     </div>
                 </div>
 
