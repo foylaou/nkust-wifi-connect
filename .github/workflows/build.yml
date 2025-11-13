@@ -64,7 +64,7 @@ jobs:
         run: pnpm vite build
 
       - name: Build Electron app
-        run: pnpm electron-builder --${{ matrix.platform }} --x64 --arm64
+        run: pnpm electron-builder --${{ matrix.platform }} --x64 --arm64 --publish never
 
       - name: List release directory
         shell: bash
