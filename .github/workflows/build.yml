@@ -63,7 +63,8 @@ jobs:
       - name: Build Vite
         run: pnpm vite build
 
-      - name: Build Electron app
+      - name: Build Electron app (macOS with signing)
+        if: matrix.platform == 'mac'
         run: pnpm electron-builder --${{ matrix.platform }} --x64 --arm64 --publish never
         env:
           CSC_LINK: ${{ secrets.CSC_LINK }}
@@ -72,6 +73,10 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           CSC_KEY_SHA1: "0a7c6890ad20d2e416f34cd084dbaefa4dbe6f6a"
+
+      - name: Build Electron app (Windows/Linux without signing)
+        if: matrix.platform != 'mac'
+        run: pnpm electron-builder --${{ matrix.platform }} --x64 --arm64 --publish never
 
       - name: List release directory
         shell: bash

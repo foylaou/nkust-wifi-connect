@@ -85,9 +85,7 @@
         },
         "zip"
       ],
-      "signtoolOptions": {
-        "certificateSha1": "BD47F36F11FAEB93635C114235D505B4DEFCB8F2"
-      }
+      "sign": null
     },
     "linux": {
       "target": [
