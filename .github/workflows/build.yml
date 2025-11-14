@@ -71,6 +71,7 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          CSC_KEY_SHA1: "0a7c6890ad20d2e416f34cd084dbaefa4dbe6f6a"
 
       - name: List release directory
         shell: bash
