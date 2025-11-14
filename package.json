@@ -84,7 +84,11 @@
           ]
         },
         "zip"
-      ]
+      ],
+      "signtoolOptions": {
+        "additionalCertificateFile": null,
+        "args": ["/a"]
+      }
     },
     "linux": {
       "target": [
