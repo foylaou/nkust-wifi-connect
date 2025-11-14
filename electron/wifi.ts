@@ -2,6 +2,7 @@
 import { exec } from "child_process";
 import { exec as sudoExec } from "sudo-prompt";
 import os from 'node:os';
+import si from "systeminformation";
 
 // --- 輔助函式 1: 執行 zsh 指令來取得 SSID ---
 function getSsidWithIpconfig(): Promise<string | null> {
@@ -46,25 +47,33 @@ function runVerboseSudo(): Promise<void> {
 }
 
 // --- 輔助函式 3: 取得 Windows SSID ---
-function getWindowsSSID(): Promise<string | null> {
-    return new Promise((resolve) => {
-        exec("netsh wlan show interfaces", { windowsHide: true }, (err, stdout) => {
-            if (err || !stdout) return resolve(null);
-            const match = stdout.match(/^\s*SSID\s*[:\uFF1A]\s*(.+)$/m);
-            resolve(match ? match[1].trim() : null);
-        });
-    });
+async function getWindowsSSID(): Promise<string | null> {
+    try {
+        const connections = await si.wifiConnections();
+        // 檢查是否有作用中的連線，並回傳第一個連線的 SSID
+        if (connections && connections.length > 0) {
+            return connections[0].ssid;
+        }
+        return null; // 沒有找到作用中的 Wi-Fi 連線
+    } catch (error) {
+        console.error("Error getting Linux SSID:", error);
+        return null;
+    }
 }
 
 // --- 輔助函式 4: 取得 Linux SSID ---
-function getLinuxSSID(): Promise<string | null> {
-    return new Promise((resolve) => {
-        exec("nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d: -f2", (err, stdout) => {
-            if (err || !stdout) return resolve(null);
-            const ssid = stdout.trim().split("\n")[0];
-            resolve(ssid || null);
-        });
-    });
+async function getLinuxSSID(): Promise<string | null> {
+    try {
+        const connections = await si.wifiConnections();
+        // 檢查是否有作用中的連線，並回傳第一個連線的 SSID
+        if (connections && connections.length > 0) {
+            return connections[0].ssid;
+        }
+        return null; // 沒有找到作用中的 Wi-Fi 連線
+    } catch (error) {
+        console.error("Error getting Linux SSID:", error);
+        return null;
+    }
 }
 
 
@@ -116,4 +125,5 @@ export async function getCurrentSSID(): Promise<string | null> {
             return null;
     }
 }
-
+// const result = await getCurrentSSID();
+// console.log(result);
