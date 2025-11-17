@@ -12,6 +12,13 @@ const __dirname = path.dirname(__filename);
 // 禁用沙盒模式以允許執行系統命令
 app.commandLine.appendSwitch('no-sandbox');
 
+// Linux 特定配置：解決 GPU 初始化問題
+if (process.platform === 'linux') {
+    app.commandLine.appendSwitch('disable-gpu');
+    app.commandLine.appendSwitch('disable-gpu-sandbox');
+    app.commandLine.appendSwitch('disable-software-rasterizer');
+}
+
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 let currentWifiStatus = "檢測中...";
@@ -108,11 +115,16 @@ app.whenReady().then(() => {
         trayIconPath = path.join(__dirname, "../assets/icon-1024x1024.png");
     }
 
-    const icon = nativeImage.createFromPath(trayIconPath);
+    let icon = nativeImage.createFromPath(trayIconPath);
 
     // Mac 上需要調整托盤圖標大小
     if (process.platform === "darwin") {
         icon.setTemplateImage(true);
+    }
+
+    // Linux 上調整托盤圖標大小（16x16 或 22x22）
+    if (process.platform === "linux") {
+        icon = icon.resize({ width: 22, height: 22 });
     }
 
     tray = new Tray(icon);

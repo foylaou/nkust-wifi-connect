@@ -90,7 +90,7 @@
       "sign": null
     },
     "linux": {
-      "icon": "assets/icon-1024x1024.png",
+      "icon": "assets/icon-512x512.png",
       "target": [
         {
           "target": "AppImage",
@@ -107,7 +107,17 @@
           ]
         }
       ],
-      "category": "Utility"
+      "category": "Utility;Network;",
+      "desktop": {
+        "Name": "NKUST WiFi Connect",
+        "Icon": "nkust-wifi-connect",
+        "StartupWMClass": "nkust-wifi-connect",
+        "Keywords": "wifi;network;nkust;login;",
+        "Comment": "NKUST WiFi Auto Login Tool"
+      },
+      "executableArgs": [
+        "--no-sandbox"
+      ]
     },
     "files": [
       "dist/**/*",
