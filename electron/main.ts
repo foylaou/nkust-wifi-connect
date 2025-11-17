@@ -56,11 +56,11 @@ const createMainWindow = () => {
         width: 480,
         height: 800,
         show: false,
+        icon: path.join(__dirname, "../assets/icon.png"),
         webPreferences: {
             preload: preloadPath,
             nodeIntegration: false,
             contextIsolation: true,
-            sandbox: false, // 禁用沙盒以允許主進程執行系統命令
         },
     });
 

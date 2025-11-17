@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import type { IpcRendererEvent } from "electron";
 
 declare global {
-    interface Window {
+    export interface Window {
         electronAPI: {
             onWifiStatus: (
-                callback: (event: any, data: { ssid: string; result: string }) => void
+                callback: (event: IpcRendererEvent, data: { ssid: string; result: string }) => void
             ) => void;
             manualLogin: () => Promise<string>;
             saveCredentials: (studentId: string, password: string) => Promise<string>;
@@ -66,7 +67,7 @@ export default function App() {
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-white text-gray-700 p-6">
             <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-6">
                 <h1 className="text-2xl font-bold text-blue-600 text-center mb-6">
-                    NKUST Wi-Fi 登入助手
+                    NKUST Wi-Fi 登入小幫手
                 </h1>
 
                 {/* WiFi 狀態顯示 */}
