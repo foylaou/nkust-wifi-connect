@@ -52,11 +52,21 @@ const updateTrayMenu = () => {
 const createMainWindow = () => {
     const preloadPath = path.join(__dirname, "preload.cjs");
 
+    // 根據平台選擇應用圖標
+    let appIconPath: string;
+    if (process.platform === "darwin") {
+        appIconPath = path.join(__dirname, "../assets/icon.icns");
+    } else if (process.platform === "win32") {
+        appIconPath = path.join(__dirname, "../assets/icon.ico");
+    } else {
+        appIconPath = path.join(__dirname, "../assets/icon-1024x1024.png");
+    }
+
     mainWindow = new BrowserWindow({
         width: 480,
         height: 800,
         show: false,
-        icon: path.join(__dirname, "../assets/icon.png"),
+        icon: appIconPath,
         webPreferences: {
             preload: preloadPath,
             nodeIntegration: false,
@@ -85,9 +95,26 @@ const createMainWindow = () => {
 };
 
 app.whenReady().then(() => {
-    // 使用相對路徑，electron 會自動處理 asar 路徑
-    const iconPath = path.join(__dirname, "../assets/tray-icon.png");
-    const icon = nativeImage.createFromPath(iconPath);
+    // 根據平台選擇托盤圖標
+    let trayIconPath: string;
+    if (process.platform === "darwin") {
+        // Mac 使用 Template 圖標（系統會自動處理深色/淺色模式）
+        trayIconPath = path.join(__dirname, "../assets/tray-iconTemplate.png");
+    } else if (process.platform === "win32") {
+        // Windows 使用 ICO 或 PNG
+        trayIconPath = path.join(__dirname, "../assets/icon.ico");
+    } else {
+        // Linux 使用 PNG
+        trayIconPath = path.join(__dirname, "../assets/icon-1024x1024.png");
+    }
+
+    const icon = nativeImage.createFromPath(trayIconPath);
+
+    // Mac 上需要調整托盤圖標大小
+    if (process.platform === "darwin") {
+        icon.setTemplateImage(true);
+    }
+
     tray = new Tray(icon);
     tray.setToolTip("NKUST Wi-Fi 登入小幫手");
 

@@ -55,6 +55,7 @@
     "productName": "nkust-wifi-connect",
     "publish": null,
     "mac": {
+      "icon": "assets/icon.icns",
       "target": [
         {
           "target": "dmg",
@@ -75,6 +76,7 @@
       }
     },
     "win": {
+      "icon": "assets/icon.ico",
       "target": [
         {
           "target": "nsis",
@@ -88,6 +90,7 @@
       "sign": null
     },
     "linux": {
+      "icon": "assets/icon-1024x1024.png",
       "target": [
         {
           "target": "AppImage",
