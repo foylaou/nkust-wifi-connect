@@ -24,7 +24,7 @@ let mainWindow: BrowserWindow | null = null;
 let currentWifiStatus = "檢測中...";
 let currentLoginStatus = "-";
 let currentAutoLogin = true;
-
+let isQuiting = false;
 // 建立更新 tray menu 的函數
 const updateTrayMenu = () => {
     if (!tray || tray.isDestroyed()) return;
@@ -47,11 +47,19 @@ const updateTrayMenu = () => {
                 if (!mainWindow || mainWindow.isDestroyed()) {
                     createMainWindow();
                 } else {
-                    mainWindow.show();
+                    app.focus();        // ← macOS 必加
+                    mainWindow.show();  // ← 顯示
+                    mainWindow.focus(); // ← 取得焦點
                 }
             }
         },
-        { label: "退出", click: () => app.quit() },
+        {
+            label: "退出",
+            click: () => {
+                isQuiting = true;  // ← 告知 close handler：這次要真正關閉
+                app.quit();
+            }
+        },
     ]);
     tray.setContextMenu(contextMenu);
 };
@@ -78,12 +86,15 @@ const createMainWindow = () => {
             preload: preloadPath,
             nodeIntegration: false,
             contextIsolation: true,
+            sandbox: false,
         },
     });
 
-    // 當窗口關閉時，清除引用
-    mainWindow.on('closed', () => {
-        mainWindow = null;
+    mainWindow.on("close", (event) => {
+        if (!isQuiting) {
+            event.preventDefault(); // ← 平時阻止關閉
+            mainWindow?.hide();
+        }
     });
 
     const devUrl = process.env.VITE_DEV_SERVER_URL;
