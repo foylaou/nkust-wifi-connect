@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>nkust_campus</name>
+	<gx:CascadingStyle kml:id="__managed_style_429994B0653BCB34835C">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_5D79EAEF0E3BCB34835C">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_38EA745CD73BCB34835C">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_429994B0653BCB34835C</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_5D79EAEF0E3BCB34835C</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0DA2156A1E3BCB348353">
+		<name>Jiangong</name>
+		<LookAt>
+			<longitude>120.3273449279092</longitude>
+			<latitude>22.65017314253521</latitude>
+			<altitude>-7.073241992117119e-10</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1812.977595413067</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.3289601032384,22.6520084670003,0 120.324418059353,22.64978838645861,0 120.3256911429794,22.64655821578491,0 120.3293563579924,22.64601854273945,0 120.3293115573137,22.65174532981889,0 120.3289601032384,22.6520084670003,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="006A13B6643BCB367458">
+		<name>First</name>
+		<LookAt>
+			<longitude>120.3383769076716</longitude>
+			<latitude>22.75835221578398</latitude>
+			<altitude>-7.073241992117119e-10</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>2942.211943280508</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.331950651302,22.75987007771746,0 120.3342531560768,22.75260195493591,0 120.3433480113984,22.75630913057836,0 120.3410879756035,22.76215359112653,0 120.331950651302,22.75987007771746,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="03AD2EA0563BCB38BC3C">
+		<name>Nanzi</name>
+		<LookAt>
+			<longitude>120.3144613242766</longitude>
+			<latitude>22.72961312782606</latitude>
+			<altitude>-7.073241992117119e-10</altitude>
+			<heading>65.65420221183888</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1994.326469559425</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.3107463769246,22.72652115460682,0 120.3120677606658,22.7254003276797,0 120.3149010793194,22.72446207433443,0 120.3175808818121,22.72752769112261,0 120.3141593301512,22.72929170174356,0 120.3107463769246,22.72652115460682,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0FCE1B4AFC3BCB3A410C">
+		<name>Yanchao</name>
+		<LookAt>
+			<longitude>120.4018209210002</longitude>
+			<latitude>22.77527356521354</latitude>
+			<altitude>0</altitude>
+			<heading>0.000383639936522165</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1649.699956085037</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.4044181027094,22.77265938506425,0 120.4054700763699,22.77664223867659,0 120.3971373171681,22.77743846603344,0 120.3968192566679,22.77255559350682,0 120.4006226124341,22.77209870744171,0 120.4044181027094,22.77265938506425,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="07FEDE2C323BCB3B2FB9">
+		<name>Cijin</name>
+		<LookAt>
+			<longitude>120.2724872625398</longitude>
+			<latitude>22.61176501294661</latitude>
+			<altitude>0</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>2099.32840098876</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.2742366866608,22.60778513421749,0 120.2727263988299,22.60989297175582,0 120.2715956343207,22.60919348674632,0 120.2731541522723,22.60711518674538,0 120.2742366866608,22.60778513421749,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="00BE43E7823BCB3C1F0C">
+		<name>Dongfang</name>
+		<LookAt>
+			<longitude>120.2450895790485</longitude>
+			<latitude>22.88066515260122</latitude>
+			<altitude>0</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>840.8841577910968</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_38EA745CD73BCB34835C</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						120.2427449131359,22.88183998315909,0 120.2430184453912,22.87923755098284,0 120.2470325475133,22.87962957683535,0 120.2464001239097,22.88232586070338,0 120.2427449131359,22.88183998315909,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
